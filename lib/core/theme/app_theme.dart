@@ -30,6 +30,10 @@ class AppTheme {
           TextStyle(color: AppColor.lightSecondaryTextColor, fontSize: 18.0),
     ),
     primaryColor: AppColor.lightPrimaryTextColor,
+    iconTheme: const IconThemeData(color: AppColor.lightPrimaryTextColor),
+    iconButtonTheme: IconButtonThemeData(
+        style: ButtonStyle(
+            iconColor: WidgetStateProperty.all(AppColor.lightPrimaryTextColor))),
     scaffoldBackgroundColor: AppColor.lightScaffoldBackgroundColor,
     appBarTheme: const AppBarTheme(
         backgroundColor: AppColor.lightAppBarBackgroundColor,
@@ -64,6 +68,11 @@ class AppTheme {
           TextStyle(color: AppColor.darkSecondaryTextColor, fontSize: 18.0),
     ),
     primaryColor: AppColor.darkPrimaryTextColor,
+    iconTheme: const IconThemeData(color: AppColor.darkPrimaryTextColor),
+    iconButtonTheme: IconButtonThemeData(
+        style: ButtonStyle(
+            iconColor:
+                WidgetStateProperty.all(AppColor.darkPrimaryTextColor))),
     scaffoldBackgroundColor: AppColor.darkScaffoldBackgroundColor,
     appBarTheme: const AppBarTheme(
       backgroundColor: AppColor.darkAppBarBackgroundColor,
