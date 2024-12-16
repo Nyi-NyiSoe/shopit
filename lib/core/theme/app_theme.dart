@@ -71,6 +71,7 @@ class AppTheme {
         backgroundColor: AppColor.lightAppBarBackgroundColor,
         iconTheme: IconThemeData(color: AppColor.lightPrimaryTextColor)),
         inputDecorationTheme: InputDecorationTheme(
+          prefixIconColor: AppColor.lightPrimaryTextColor,
           hintStyle: TextStyle(color: AppColor.lightSecondaryTextColor),
         )
   );
@@ -140,6 +141,7 @@ class AppTheme {
             backgroundColor:
                 WidgetStateProperty.all(AppColor.darkAppBarBackgroundColor))),
                 inputDecorationTheme: InputDecorationTheme(
+                  prefixIconColor: AppColor.darkPrimaryTextColor,
           hintStyle: TextStyle(color: AppColor.darkSecondaryTextColor),
                 ),
     appBarTheme: const AppBarTheme(
