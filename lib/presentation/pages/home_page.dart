@@ -8,22 +8,24 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        actions: [
-          IconButton(
-            icon: context.watch<ThemeCubit>().state == AppTheme().lightTheme
-                ? const Icon(Icons.nightlight_round)
-                : const Icon(Icons.wb_sunny),
-            onPressed: () async{
-              context.read<ThemeCubit>().toggleTheme();
-            },
-          )
-        ],
-        title: const Text('Shop It'),
-      ),
-      body: const Center(
-        child: Text('Welcome to Shop It'),
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          actions: [
+            IconButton(
+              icon: context.watch<ThemeCubit>().state == AppTheme().lightTheme
+                  ? const Icon(Icons.nightlight_round)
+                  : const Icon(Icons.wb_sunny),
+              onPressed: () async {
+                context.read<ThemeCubit>().toggleTheme();
+              },
+            )
+          ],
+          title: const Text('Shop It'),
+        ),
+        body: const Center(
+          child: Text('Welcome to Shop It'),
+        ),
       ),
     );
   }
