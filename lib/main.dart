@@ -1,22 +1,38 @@
 import 'package:flutter/material.dart';
-import 'package:shopit/core/theme/app_theme.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shopit/presentation/bloc/theme_bloc/theme_cubit.dart';
 import 'package:shopit/presentation/pages/home_page.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final themeCubit = ThemeCubit();
+  await themeCubit.loadTheme();
+  runApp(MyApp(
+    themeCubit: themeCubit,
+  ));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final ThemeCubit themeCubit;
+  const MyApp({super.key, required this.themeCubit});
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Shop It',
-      theme: AppTheme().lightTheme,
-      home: HomePage(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<ThemeCubit>.value(value: themeCubit),
+      ],
+      child: BlocBuilder<ThemeCubit, ThemeData>(
+        builder: (context, theme) {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: 'Shop It',
+            theme: theme,
+            home: const HomePage(),
+          );
+        },
+      ),
     );
   }
 }

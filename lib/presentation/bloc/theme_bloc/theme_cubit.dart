@@ -11,9 +11,20 @@ class ThemeCubit extends Cubit<ThemeData> {
   static final _darkTheme = AppTheme().darkTheme;
 
   Future<void> loadTheme() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final prefs = await SharedPreferences.getInstance();
+
+    // Get the saved theme; default to 'light' if no value exists
     final theme = prefs.getString('theme') ?? 'light';
-    emit(theme == 'light' ? _lightTheme : _darkTheme);
+
+    // Emit the appropriate theme based on the saved value
+    if (theme == 'light') {
+      emit(_lightTheme);
+    } else if (theme == 'dark') {
+      emit(_darkTheme);
+    } else {
+      // Fallback in case of unexpected values
+      emit(_lightTheme);
+    }
   }
 
   Future<void> toggleTheme() async {
