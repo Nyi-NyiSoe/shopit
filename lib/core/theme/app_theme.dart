@@ -61,15 +61,18 @@ class AppTheme {
                 WidgetStateProperty.all(AppColor.lightPrimaryTextColor))),
     elevatedButtonTheme: ElevatedButtonThemeData(
         style: ButtonStyle(
-          foregroundColor: WidgetStateProperty.all(AppColor.lightPrimaryTextColor),
-            textStyle: WidgetStateProperty.all(
-                const TextStyle(color: AppColor.lightPrimaryTextColor)),
+            foregroundColor:
+                WidgetStateProperty.all(AppColor.lightPrimaryTextColor),
+            textStyle: WidgetStateProperty.all(const TextStyle(fontSize: 20)),
             backgroundColor:
                 WidgetStateProperty.all(AppColor.lightAppBarBackgroundColor))),
     scaffoldBackgroundColor: AppColor.lightScaffoldBackgroundColor,
     appBarTheme: const AppBarTheme(
         backgroundColor: AppColor.lightAppBarBackgroundColor,
         iconTheme: IconThemeData(color: AppColor.lightPrimaryTextColor)),
+        inputDecorationTheme: InputDecorationTheme(
+          hintStyle: TextStyle(color: AppColor.lightSecondaryTextColor),
+        )
   );
 
   final darkTheme = ThemeData(
@@ -131,11 +134,14 @@ class AppTheme {
     scaffoldBackgroundColor: AppColor.darkScaffoldBackgroundColor,
     elevatedButtonTheme: ElevatedButtonThemeData(
         style: ButtonStyle(
-          foregroundColor: WidgetStateProperty.all(AppColor.darkPrimaryTextColor),
-            textStyle: WidgetStateProperty.all(
-                const TextStyle(fontSize: 20)),
+            foregroundColor:
+                WidgetStateProperty.all(AppColor.darkPrimaryTextColor),
+            textStyle: WidgetStateProperty.all(const TextStyle(fontSize: 20)),
             backgroundColor:
                 WidgetStateProperty.all(AppColor.darkAppBarBackgroundColor))),
+                inputDecorationTheme: InputDecorationTheme(
+          hintStyle: TextStyle(color: AppColor.darkSecondaryTextColor),
+                ),
     appBarTheme: const AppBarTheme(
       backgroundColor: AppColor.darkAppBarBackgroundColor,
     ),
