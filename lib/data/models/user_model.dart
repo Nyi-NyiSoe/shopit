@@ -1,4 +1,7 @@
-class UserModel {
+import 'package:equatable/equatable.dart';
+import 'package:shopit/domain/entities/user.dart';
+
+class UserModel extends User with EquatableMixin{
   final String id;
   final String name;
   final String email;
@@ -11,7 +14,7 @@ class UserModel {
     required this.email,
     required this.password,
     required this.avatar,
-  });
+  }):super(id: id, name: name, email: email, password: password);
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
@@ -32,4 +35,7 @@ class UserModel {
       'avatar': avatar,
     };
   }
+
+  @override
+  List<Object?> get props => [id, name, email, password, avatar];
 }
