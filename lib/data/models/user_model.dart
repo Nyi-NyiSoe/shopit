@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:shopit/domain/entities/user.dart';
 
 class UserModel extends User with EquatableMixin{
-  final String id;
+  final int id;
   final String fname;
   final String lname;
   final String username;
