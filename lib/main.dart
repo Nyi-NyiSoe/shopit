@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:shopit/presentation/bloc/theme_bloc/theme_cubit.dart';
 import 'package:shopit/presentation/pages/login_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load(fileName: ".env");
   final themeCubit = ThemeCubit();
   await themeCubit.loadTheme();
   runApp(MyApp(
