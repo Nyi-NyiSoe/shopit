@@ -9,17 +9,23 @@ class AuthRemoteDataSource {
   final _loginURl = dotenv.env['LOGIN_URL'];
   final _signupURl = dotenv.env['SIGNUP_URL'];
 
-  Future<UserModel> login(String email, String password) async {
+  final headers = {
+    'Content-Type': 'application/json',
+  };
+
+  Future<UserModel> login(String username, String password) async {
     final response = await http.post(
       Uri.parse(_loginURl!),
+      headers: headers,
       body: {
-        'email': email,
+        'username': username,
         'password': password,
       },
     );
     if (response.statusCode == 200) {
+      print('success');
       final jsonRes = jsonDecode(response.body);
-      return UserModel.fromJson(jsonRes);
+      return UserModel.fromJson(jsonRes['user']);
     } else {
       throw Exception('Failed to login');
     }
