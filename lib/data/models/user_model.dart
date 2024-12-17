@@ -3,23 +3,36 @@ import 'package:shopit/domain/entities/user.dart';
 
 class UserModel extends User with EquatableMixin{
   final String id;
-  final String name;
+  final String fname;
+  final String lname;
+  final String username;
   final String email;
   final String password;
   final String avatar;
 
   UserModel({
     required this.id,
-    required this.name,
+    required this.fname,
+    required this.lname,
+    required this.username,
     required this.email,
     required this.password,
     required this.avatar,
-  }):super(id: id, name: name, email: email, password: password);
+  }): super(
+    id: id,
+    fname: fname,
+    lname: lname,
+    username: username,
+    email: email,
+    password: password,
+  );
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
       id: json['id'],
-      name: json['name'],
+      fname: json['fname'],
+      lname: json['lname'],
+      username: json['username'],
       email: json['email'],
       password: json['password'],
       avatar: json['avatar'],
@@ -29,7 +42,9 @@ class UserModel extends User with EquatableMixin{
   Map<String, dynamic> toJson() {
     return {
       'id': id,
-      'name': name,
+      'fname': fname,
+      'lname': lname,
+      'username': username,
       'email': email,
       'password': password,
       'avatar': avatar,
@@ -37,5 +52,5 @@ class UserModel extends User with EquatableMixin{
   }
 
   @override
-  List<Object?> get props => [id, name, email, password, avatar];
+  List<Object?> get props => [id, fname, lname, username, email, password, avatar];
 }
