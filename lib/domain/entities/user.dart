@@ -1,5 +1,5 @@
 abstract class User {
-  final String id;
+  final int id;
   final String fname;
   final String lname;
   final String username;

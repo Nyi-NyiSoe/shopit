@@ -15,7 +15,7 @@ class AuthRepositoryImpl implements AuthRepository {
     // TODO: implement login
     try {
       final user = await remoteDataSource.login(username, password);
-      await localDataSource.saveUser(user.id);
+      await localDataSource.saveUser(user.id.toString());
       return user;
     } catch (e) {
       throw e;
