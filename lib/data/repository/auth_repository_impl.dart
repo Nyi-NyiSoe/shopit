@@ -10,9 +10,9 @@ class AuthRepositoryImpl implements AuthRepository {
   AuthRepositoryImpl(
       {required this.remoteDataSource,
       required this.localDataSource}); //new constructor
+
   @override
   Future<UserModel> login(String username, String password) async {
-    // TODO: implement login
     try {
       final user = await remoteDataSource.login(username, password);
       await localDataSource.saveUser(user.id.toString());
@@ -33,7 +33,6 @@ class AuthRepositoryImpl implements AuthRepository {
 
   @override
   Future<UserModel> signup(String email, String password) {
-    // TODO: implement signup
     throw UnimplementedError();
   }
 }

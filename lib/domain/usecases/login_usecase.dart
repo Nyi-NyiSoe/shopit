@@ -6,6 +6,7 @@ class LoginUsecase {
 
   LoginUsecase(this.authRepository);
 
+  // Login user
   Future<UserModel> login(String username, String password) async {
     return authRepository.login(username, password);
   }

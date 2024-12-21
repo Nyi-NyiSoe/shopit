@@ -13,15 +13,17 @@ import 'package:shopit/presentation/pages/login_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  // Load .env file
   await dotenv.load(fileName: ".env");
   final themeCubit = ThemeCubit();
   await themeCubit.loadTheme();
 
+  // Check if user is logged in
   final sharedPreferences = await SharedPreferences.getInstance();
   bool isLoggedIn = sharedPreferences.containsKey('user');
   print(isLoggedIn);
 
+  // Create login usecase
   final loginUsecase = LoginUsecase(
     AuthRepositoryImpl(
       remoteDataSource: AuthRemoteDataSource(),
