@@ -12,6 +12,7 @@ class HomePage extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           actions: [
+          
             IconButton(
               icon: context.watch<ThemeCubit>().state == AppTheme().darkTheme
                   ? const Icon(Icons.nightlight_round)
