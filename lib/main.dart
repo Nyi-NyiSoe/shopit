@@ -21,7 +21,6 @@ void main() async {
   // Check if user is logged in
   final sharedPreferences = await SharedPreferences.getInstance();
   bool isLoggedIn = sharedPreferences.containsKey('user');
-  print(isLoggedIn);
 
   // Create login usecase
   final loginUsecase = LoginUsecase(

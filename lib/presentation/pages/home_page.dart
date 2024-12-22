@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shopit/core/theme/app_theme.dart';
 import 'package:shopit/presentation/bloc/theme_bloc/theme_cubit.dart';
 
 class HomePage extends StatelessWidget {
@@ -12,15 +13,13 @@ class HomePage extends StatelessWidget {
         appBar: AppBar(
           actions: [
             IconButton(
-              icon: context.watch<ThemeCubit>().state.brightness ==
-                      Brightness.light
+              icon: context.watch<ThemeCubit>().state == AppTheme().darkTheme
                   ? const Icon(Icons.nightlight_round)
                   : const Icon(Icons.wb_sunny),
-              onPressed: () async {
+              onPressed: ()  {
                 context.read<ThemeCubit>().toggleTheme();
               },
-            ),
-         
+            )
           ],
           title: const Text('Shop It'),
         ),
