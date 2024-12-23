@@ -11,13 +11,15 @@ class HomePage extends StatelessWidget {
     return BlocBuilder<CategoryCubit, List<CategoryModel>>(
         builder: (context, categories) {
       if (categories.isEmpty) {
-        return Center(child: CircularProgressIndicator());
+        return const Center(child: CircularProgressIndicator());
       } else {
         return ListView.builder(
             itemCount: categories.length,
             itemBuilder: (context, index) {
               final category = categories[index];
-              return ListTile(title: Text(category.name));
+              return Card(
+                child: ListTile(title: Text(category.name)),
+              );
             });
       }
     });
