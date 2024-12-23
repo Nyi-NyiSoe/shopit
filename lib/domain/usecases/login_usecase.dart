@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:shopit/data/models/user_model.dart';
 import 'package:shopit/domain/repository/auth_repository.dart';
 
@@ -12,6 +14,7 @@ class LoginUsecase {
   }
 
   Future<void> logout() async {
+    log('logging out');
     return authRepository.logout();
   }
 }

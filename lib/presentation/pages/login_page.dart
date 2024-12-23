@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shopit/presentation/bloc/auth_bloc/auth_bloc.dart';
 import 'package:shopit/presentation/bloc/auth_bloc/auth_event.dart';
 import 'package:shopit/presentation/bloc/auth_bloc/auth_state.dart';
-import 'package:shopit/presentation/pages/home_page.dart';
+import 'package:shopit/presentation/pages/wrapper.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});
@@ -18,7 +18,7 @@ class LoginPage extends StatelessWidget {
             body: BlocListener<AuthBloc, AuthState>(listener: (context, state) {
       if (state is AuthSuccess) {
         Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) => HomePage()));
+            MaterialPageRoute(builder: (context) => Wrapper()));
       } else if (state is AuthError) {
         ScaffoldMessenger.of(context)
             .showSnackBar(SnackBar(content: Text(state.message)));
