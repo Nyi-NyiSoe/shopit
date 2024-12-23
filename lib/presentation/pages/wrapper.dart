@@ -10,8 +10,8 @@ class Wrapper extends StatefulWidget {
 
 class _WrapperState extends State<Wrapper> {
   int _currentIndex = 0;
-  List<Widget> _pages = <Widget>[
-    HomePage(),
+  final List<Widget> _pages = <Widget>[
+    const HomePage(),
     const Center(child: Text('Cart')),
     const Center(child: Text('Profile')),
   ];
