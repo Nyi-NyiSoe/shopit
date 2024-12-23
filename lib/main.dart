@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:shopit/data/repository/auth_repository_impl.dart';
+import 'package:shopit/data/repository/auth_repo_impl/auth_repository_impl.dart';
 import 'package:shopit/data/source/auth_repo/auth_local_data_source.dart';
 import 'package:shopit/data/source/auth_repo/auth_remote_data_source.dart';
 import 'package:shopit/domain/usecases/login_usecase.dart';

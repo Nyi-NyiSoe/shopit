@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shopit/core/theme/app_theme.dart';
-import 'package:shopit/presentation/bloc/auth_bloc/auth_bloc.dart';
-import 'package:shopit/presentation/bloc/auth_bloc/auth_event.dart';
 import 'package:shopit/presentation/bloc/theme_bloc/theme_cubit.dart';
-import 'package:shopit/presentation/pages/login_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -23,13 +20,7 @@ class HomePage extends StatelessWidget {
                 context.read<ThemeCubit>().toggleTheme();
               },
             ),
-            IconButton(
-                onPressed: () {
-                  context.read<AuthBloc>().add(LogoutEvent());
-
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=> LoginPage()));
-                },
-                icon: Icon(Icons.logout_outlined))
+            IconButton(onPressed: () async {}, icon: Icon(Icons.data_array))
           ],
           title: const Text('Shop It'),
         ),
