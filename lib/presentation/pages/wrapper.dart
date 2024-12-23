@@ -23,7 +23,7 @@ class _WrapperState extends State<Wrapper> {
           padding: const EdgeInsets.all(10),
           child: BottomNavigationBar(
             currentIndex: _currentIndex,
-            items: [
+            items: const [
             BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
             BottomNavigationBarItem(
                 icon: Icon(Icons.shopping_cart), label: 'Cart'),
