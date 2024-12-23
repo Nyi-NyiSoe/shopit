@@ -8,8 +8,8 @@ import 'package:shopit/data/source/auth_repo/auth_remote_data_source.dart';
 import 'package:shopit/domain/usecases/login_usecase.dart';
 import 'package:shopit/presentation/bloc/auth_bloc/auth_bloc.dart';
 import 'package:shopit/presentation/bloc/theme_bloc/theme_cubit.dart';
-import 'package:shopit/presentation/pages/home_page.dart';
 import 'package:shopit/presentation/pages/login_page.dart';
+import 'package:shopit/presentation/pages/wrapper.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -66,7 +66,7 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             title: 'Shop It',
             theme: theme,
-            home: isLoggedIn ? HomePage() : LoginPage(),
+            home: isLoggedIn ? Wrapper() : LoginPage(),
           );
         },
       ),
