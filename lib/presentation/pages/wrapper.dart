@@ -23,6 +23,11 @@ class _WrapperState extends State<Wrapper> {
           padding: const EdgeInsets.all(10),
           child: BottomNavigationBar(
             currentIndex: _currentIndex,
+            onTap: (index) {
+              setState(() {
+                _currentIndex = index;
+              });
+            },
             items: const [
             BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
             BottomNavigationBarItem(
