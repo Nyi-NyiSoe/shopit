@@ -1,15 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:shopit/presentation/pages/home_page.dart';
 
-class Wrapper extends StatelessWidget {
+class Wrapper extends StatefulWidget {
   const Wrapper({super.key});
 
+  @override
+  State<Wrapper> createState() => _WrapperState();
+}
+
+class _WrapperState extends State<Wrapper> {
+  int _currentIndex = 0;
+  List<Widget> _pages = <Widget>[
+    HomePage(),
+    const Center(child: Text('Cart')),
+    const Center(child: Text('Profile')),
+  ];
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         bottomNavigationBar: Container(
           padding: const EdgeInsets.all(10),
-          child: BottomNavigationBar(items: [
+          child: BottomNavigationBar(
+            currentIndex: _currentIndex,
+            items: [
             BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
             BottomNavigationBarItem(
                 icon: Icon(Icons.shopping_cart), label: 'Cart'),
@@ -19,9 +33,7 @@ class Wrapper extends StatelessWidget {
         appBar: AppBar(
           title: const Text('Shop It'),
         ),
-        body: const Center(
-          child: Text('Welcome to Shop It'),
-        ),
+        body: _pages[_currentIndex],
       ),
     );
   }
