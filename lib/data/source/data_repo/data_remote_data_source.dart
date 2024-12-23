@@ -19,6 +19,7 @@ class DataRemoteDataSource {
 
           
       } else {
+        print(response.statusCode);
         return [];
       }
     } catch (e) {

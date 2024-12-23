@@ -7,10 +7,11 @@ class DataRepoImpl implements DataRepository {
   final DataRemoteDataSource remoteDataSource;
 
 
-  @override
+  
   DataRepoImpl({
     required this.remoteDataSource,
   });
+  @override
   Future<List<CategoryModel>> getCategoryModels() {
     return remoteDataSource.getCategoryModels();
   }

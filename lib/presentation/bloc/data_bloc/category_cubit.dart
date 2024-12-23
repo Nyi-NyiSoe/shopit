@@ -8,8 +8,12 @@ class CategoryCubit extends Cubit<List<CategoryModel>>{
   final DataUsecase dataUsecase;
 
   Future<void> getCategoryModels() async {
-    final categories = await dataUsecase.getCategoryModels();
+   try{
+     final categories = await dataUsecase.getCategoryModels();
     emit(categories);
+   }catch(e){
+     print(e);
+   }
   }
 
 }

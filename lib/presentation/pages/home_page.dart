@@ -1,33 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shopit/core/theme/app_theme.dart';
-import 'package:shopit/presentation/bloc/theme_bloc/theme_cubit.dart';
+import 'package:shopit/data/models/category_model.dart';
+import 'package:shopit/presentation/bloc/data_bloc/category_cubit.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          actions: [
-            IconButton(
-              icon: context.watch<ThemeCubit>().state == AppTheme().darkTheme
-                  ? const Icon(Icons.nightlight_round)
-                  : const Icon(Icons.wb_sunny),
-              onPressed: () {
-                context.read<ThemeCubit>().toggleTheme();
-              },
-            ),
-            IconButton(onPressed: () async {}, icon: Icon(Icons.data_array))
-          ],
-          title: const Text('Shop It'),
-        ),
-        body: const Center(
-          child: Text('Welcome to Shop It'),
-        ),
-      ),
-    );
+    return BlocBuilder<CategoryCubit, List<CategoryModel>>(
+        builder: (context, categories) {
+      if (categories.isEmpty) {
+        return Center(child: CircularProgressIndicator());
+      } else {
+        return ListView.builder(
+            itemCount: categories.length,
+            itemBuilder: (context, index) {
+              final category = categories[index];
+              return ListTile(title: Text(category.name));
+            });
+      }
+    });
   }
 }
