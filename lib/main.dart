@@ -15,6 +15,7 @@ import 'package:shopit/presentation/bloc/data_bloc/product_cubit.dart';
 import 'package:shopit/presentation/bloc/theme_bloc/theme_cubit.dart';
 import 'package:shopit/presentation/pages/home_page.dart';
 import 'package:shopit/presentation/pages/login_page.dart';
+import 'package:shopit/presentation/pages/product_page.dart';
 import 'package:shopit/presentation/pages/wrapper.dart';
 
 void main() async {
