@@ -13,6 +13,7 @@ import 'package:shopit/presentation/bloc/auth_bloc/auth_bloc.dart';
 import 'package:shopit/presentation/bloc/data_bloc/category_cubit.dart';
 import 'package:shopit/presentation/bloc/data_bloc/product_cubit.dart';
 import 'package:shopit/presentation/bloc/theme_bloc/theme_cubit.dart';
+import 'package:shopit/presentation/pages/home_page.dart';
 import 'package:shopit/presentation/pages/login_page.dart';
 import 'package:shopit/presentation/pages/wrapper.dart';
 
@@ -72,13 +73,19 @@ class MyApp extends StatelessWidget {
         ),
 
         BlocProvider<CategoryCubit>(
-            create: (context) => CategoryCubit(dataUsecase)..getCategoryModels()),
+            create: (context) =>
+                CategoryCubit(dataUsecase)..getCategoryModels()),
         BlocProvider<ProductCubit>(
             create: (context) => ProductCubit(dataUsecase)),
       ],
       child: BlocBuilder<ThemeCubit, ThemeData>(
         builder: (context, theme) {
           return MaterialApp(
+            routes: {
+              '/login': (context) => LoginPage(),
+              '/home': (context) => const HomePage(),
+              '/products': (context) => const ProductPage(),
+            },
             debugShowCheckedModeBanner: false,
             title: 'Shop It',
             theme: theme,

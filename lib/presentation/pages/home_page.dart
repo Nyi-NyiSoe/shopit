@@ -17,8 +17,12 @@ class HomePage extends StatelessWidget {
             itemCount: categories.length,
             itemBuilder: (context, index) {
               final category = categories[index];
-              return Card(
-                child: ListTile(title: Text(category.name)),
+              return GestureDetector(
+                onTap: () => Navigator.pushNamed(context, '/products',
+                    arguments: category.name),
+                child: Card(
+                  child: ListTile(title: Text(category.name)),
+                ),
               );
             });
       }
