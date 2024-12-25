@@ -41,6 +41,7 @@ dependencies:
   http:
   get_it:
   flutter_dotenv:
+  go_router:
 
 
 dev_dependencies:
