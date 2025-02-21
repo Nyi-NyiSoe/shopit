@@ -3,12 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:shopit/core/configs/routing_service.dart';
-import 'package:shopit/data/repository/auth_repo_impl/auth_repository_impl.dart';
-import 'package:shopit/data/repository/data_repo_impl/data_repo_impl.dart';
+import 'package:shopit/core/configs/locator.dart';
 import 'package:shopit/data/source/auth_repo/auth_local_data_source.dart';
-import 'package:shopit/data/source/auth_repo/auth_remote_data_source.dart';
-import 'package:shopit/data/source/data_repo/data_remote_data_source.dart';
 import 'package:shopit/domain/usecases/data_usecase.dart';
 import 'package:shopit/domain/usecases/login_usecase.dart';
 import 'package:shopit/presentation/bloc/auth_bloc/auth_bloc.dart';
@@ -21,53 +17,45 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // Load .env file
   await dotenv.load(fileName: ".env");
+  // Initialize service locator
+  // Load .env file
+  await dotenv.load(fileName: ".env");
+
+  // Initialize service locator
+  await setupLocator();
+
+  // Load theme
   final themeCubit = ThemeCubit();
   await themeCubit.loadTheme();
 
-  // Check if user is logged in
-  final sharedPreferences = await SharedPreferences.getInstance();
-  bool isLoggedIn = sharedPreferences.containsKey('user');
+  // Retrieve SharedPreferences (ensure it's registered in locator)
+  final sharedPreferences = locator<SharedPreferences>();
+  final bool isLoggedIn = sharedPreferences.containsKey('user');
 
-  GoRouter router = RoutingService().router;
-
-  // Create login usecase
-  final loginUsecase = LoginUsecase(
-    AuthRepositoryImpl(
-      remoteDataSource: AuthRemoteDataSource(),
-      localDataSource:
-          AuthLocalDataSource(sharedPreferences: sharedPreferences),
-    ),
-  );
-  final dataUsecase =
-      DataUsecase(DataRepoImpl(remoteDataSource: DataRemoteDataSource()));
-
-      final localDataSource = AuthLocalDataSource(sharedPreferences: sharedPreferences);
+  // Get GoRouter instance
+  final GoRouter router = locator<GoRouter>();
 
   runApp(MyApp(
     themeCubit: themeCubit,
     isLoggedIn: isLoggedIn,
-    loginUsecase: loginUsecase,
-    dataUsecase: dataUsecase,
+    dataUsecase: locator<DataUsecase>(),
     router: router,
-    localDataSource: localDataSource,
   ));
 }
 
 class MyApp extends StatelessWidget {
   final ThemeCubit themeCubit;
   final bool isLoggedIn;
-  final loginUsecase;
+
   final dataUsecase;
   final GoRouter router;
-  final localDataSource;
+
   const MyApp({
     super.key,
     required this.themeCubit,
     this.isLoggedIn = false,
-    this.loginUsecase,
     this.dataUsecase,
     required this.router,
-    this.localDataSource
   });
 
   // This widget is the root of your application.
@@ -78,13 +66,12 @@ class MyApp extends StatelessWidget {
         //theme cubit
         BlocProvider<ThemeCubit>.value(value: themeCubit),
         //auth bloc
-        BlocProvider<AuthBloc>(
-          create: (context){
-            final authBloc = AuthBloc(loginUsecase, localDataSource);
-            authBloc.add(AppStartedEvent());
-            return authBloc;
-          }
-        ),
+        BlocProvider<AuthBloc>(create: (context) {
+          final authBloc =
+              AuthBloc(locator<LoginUsecase>(), locator<AuthLocalDataSource>());
+          authBloc.add(AppStartedEvent());
+          return authBloc;
+        }),
 
         BlocProvider<CategoryCubit>(
             create: (context) =>
