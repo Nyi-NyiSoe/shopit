@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:shopit/presentation/bloc/auth_bloc/auth_bloc.dart';
+import 'package:shopit/presentation/bloc/auth_bloc/auth_event.dart';
+import 'package:shopit/presentation/bloc/auth_bloc/auth_state.dart';
 import 'package:shopit/presentation/pages/home_page.dart';
 
 class Wrapper extends StatefulWidget {
@@ -37,8 +42,33 @@ class _WrapperState extends State<Wrapper> {
         ),
         appBar: AppBar(
           title: const Text('Shop It'),
+          actions: [
+            IconButton(
+                icon: const Icon(Icons.logout),
+                onPressed: () {
+                  context.read<AuthBloc>().add(LogoutEvent());
+                }),
+          ],
         ),
-        body: _pages[_currentIndex],
+        body: BlocListener<AuthBloc, AuthState>(
+          listener: (context, state) {
+            if (state is AuthInitial) {
+                context.go('/login');
+            }
+          },
+          child: BlocBuilder<AuthBloc, AuthState>(
+            builder: (context, state) {
+              if (state is AuthLoading) {
+                return const Center(child: CircularProgressIndicator());
+              } else if (state is AuthSuccess) {
+                return _pages[_currentIndex];
+              } else if (state is AuthError) {
+                return Center(child: Text(state.message));
+              }
+              return const SizedBox.shrink();
+            },
+          ),
+        ),
       ),
     );
   }
