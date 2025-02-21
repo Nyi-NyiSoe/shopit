@@ -2,19 +2,11 @@ import 'package:equatable/equatable.dart';
 import 'package:shopit/domain/entities/category.dart';
 
 class CategoryModel extends Category with EquatableMixin {
-  final String slug;
-  final String name;
-  final String url;
-
   CategoryModel({
-    required this.slug,
-    required this.name,
-    required this.url,
-  }) : super(
-          slug: slug,
-          name: name,
-          url: url,
-        );
+    required super.slug,
+    required super.name,
+    required super.url,
+  });
 
   factory CategoryModel.fromJson(Map<String, dynamic> json) {
     return CategoryModel(

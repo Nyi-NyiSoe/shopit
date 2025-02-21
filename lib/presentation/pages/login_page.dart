@@ -25,7 +25,7 @@ class LoginPage extends StatelessWidget {
       }
     }, child: BlocBuilder<AuthBloc, AuthState>(builder: (context, state) {
       if (state is AuthLoading) {
-        return Center(child: CircularProgressIndicator());
+        return const Center(child: CircularProgressIndicator());
       }
       return Padding(
         padding: const EdgeInsets.all(10.0),
