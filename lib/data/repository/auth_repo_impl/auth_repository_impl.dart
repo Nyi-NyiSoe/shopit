@@ -15,7 +15,7 @@ class AuthRepositoryImpl implements AuthRepository {
   Future<UserModel> login(String username, String password) async {
     try {
       final user = await remoteDataSource.login(username, password);
-      await localDataSource.saveUser(user.id.toString());
+      await localDataSource.saveUser(user);
       return user;
     } catch (e) {
       throw e;
